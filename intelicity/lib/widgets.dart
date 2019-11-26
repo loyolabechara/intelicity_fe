@@ -9,14 +9,15 @@ Widget Corpo(BuildContext context) {
 
       LogoPMNF(context),
 
-      Botoes(context),
+      Botoes1(context),
+
+      Botoes2(context),
 
       Padding(
         padding: const EdgeInsets.only(left: 8, right: 8),
         child: SizedBox(
           width: double.infinity,
           child: RaisedButton(
-            color: Colors.blue,
             onPressed: () => {
               Navigator.pushNamed(context, '/Solicitacao')
             },
@@ -62,9 +63,9 @@ Widget BotaoDefesaCivil(BuildContext context){
 Widget LogoPMNF(BuildContext context) {
   return Padding(
     padding: const EdgeInsets.only(
-      left: 100.0,
-      top: 20.0,
-      right: 100.0,
+      left: 120.0,
+      top: 10.0,
+      right: 120.0,
       bottom: 50,
     ),
     child: Center(
@@ -72,39 +73,67 @@ Widget LogoPMNF(BuildContext context) {
     ),
   );
 }
-Widget Botoes(BuildContext context){
+
+Widget Botoes1(BuildContext context){
   return Row(
       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
       children: <Widget>[
-        RaisedButton(
-          color: Colors.blue,
-          onPressed: () => {
-            Navigator.pushNamed(context, '/BuscaAtiva')
-          },
-          child: Text('Busca Ativa', style: const TextStyle(
-              fontWeight: FontWeight.bold, fontSize: 16.0, color: Colors.white),
+        SizedBox(
+          width: 180,
+          child: RaisedButton(
+            onPressed: () => {
+              Navigator.pushNamed(context, '/BuscaAtiva')
+            },
+            child: Text('Busca Ativa', style: const TextStyle(
+                fontWeight: FontWeight.bold, fontSize: 18.0, color: Colors.white),
+            ),
           ),
         ),
 
-        RaisedButton(
-          color: Colors.blue,
-          onPressed: () => {
-            Navigator.pushNamed(context, '/Cevest')
-          },
-          child: Text('Cevest', style: const TextStyle(
-              fontWeight: FontWeight.bold, fontSize: 16.0, color: Colors.white),
+        SizedBox(
+          width: 180,
+          child: RaisedButton(
+            onPressed: () => {
+              Navigator.pushNamed(context, '/Cevest')
+            },
+            child: Text('Cevest', style: const TextStyle(
+                fontWeight: FontWeight.bold, fontSize: 18.0, color: Colors.white),
+            ),
+          ),
+        ),
+      ]
+  );
+}
+
+Widget Botoes2(BuildContext context){
+  return Row(
+      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+      children: <Widget>[
+
+        SizedBox(
+          width: 180,
+          child: RaisedButton(
+            onPressed: () => {
+              Navigator.pushNamed(context, '/Calendario')
+            },
+            child: Text('Calendário', style: const TextStyle(
+                fontWeight: FontWeight.bold, fontSize: 18.0, color: Colors.white),
+            ),
           ),
         ),
 
-        RaisedButton(
-          color: Colors.blue,
-          onPressed: () => {
-            Navigator.pushNamed(context, '/Calendario')
-          },
-          child: Text('Calendário', style: const TextStyle(
-              fontWeight: FontWeight.bold, fontSize: 16.0, color: Colors.white),
+        SizedBox(
+          width: 180,
+          child: RaisedButton(
+            onPressed: () => {
+              Navigator.pushNamed(context, '/Telefones')
+            },
+            child: Text('Telefones Úteis', style: const TextStyle(
+                fontWeight: FontWeight.bold, fontSize: 18.0, color: Colors.white),
+            ),
           ),
         ),
+
       ]
   );
 }

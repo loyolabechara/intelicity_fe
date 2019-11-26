@@ -7,6 +7,7 @@ import 'package:intelicity/inicio.dart';
 import 'package:intelicity/sobre.dart';
 import 'package:intelicity/solicitacao.dart';
 import 'package:intelicity/calendario.dart';
+import 'package:intelicity/telefone.dart';
 
 class RouteGenerator {
   static Route<dynamic> generateRoute(RouteSettings settings) {
@@ -31,6 +32,9 @@ class RouteGenerator {
 
       case '/Cadastro':
         return MaterialPageRoute<dynamic>(builder: (_) => CadastroPage());
+
+      case '/Telefones':
+        return MaterialPageRoute<dynamic>(builder: (_) => TelefonePage());
 
       case '/Sobre':
         return MaterialPageRoute<dynamic>(builder: (_) => SobrePage());

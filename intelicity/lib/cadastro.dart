@@ -93,9 +93,6 @@ class _CadastroPageState extends State<CadastroPage> {
   String _validarNome(String value) {
     String patttern = r'(^[A-Za-záàâãéèêíïóôõöúçñÁÀÂÃÉÈÍÏÓÔÕÖÚÇÑ ]*$)';
 
-
-//    /^[A-Za-záàâãéèêíïóôõöúçñÁÀÂÃÉÈÍÏÓÔÕÖÚÇÑ ]+$/
-
     RegExp regExp = RegExp(patttern);
     if (value.length == 0) {
       return "Informe o nome";
