@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:intelicity/buscaativa.dart';
-import 'package:intelicity/cadastro.dart';
+import 'package:intelicity/cadastro/cadastro.dart';
 import 'package:intelicity/cevest.dart';
 import 'package:intelicity/defesacivil.dart';
+import 'package:intelicity/emprego.dart';
 import 'package:intelicity/inicio.dart';
 import 'package:intelicity/sobre.dart';
 import 'package:intelicity/solicitacao.dart';
@@ -29,6 +30,9 @@ class RouteGenerator {
 
       case '/Solicitacao':
         return MaterialPageRoute<dynamic>(builder: (_) => SolicitacaoPage());
+
+      case '/Emprego':
+        return MaterialPageRoute<dynamic>(builder: (_) => EmpregoPage());
 
       case '/Cadastro':
         return MaterialPageRoute<dynamic>(builder: (_) => CadastroPage());

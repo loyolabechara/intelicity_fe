@@ -1,19 +1,16 @@
 # intelicity
 
-Aplicativo integrado para Cidades Inteligentes
+InteliCity
 
-## Proposta
+## Getting Started
 
-Este aplicativo tem como proposta oferecer serviços aos cidadãos de Nova Friburgo.
+This project is a starting point for a Flutter application.
 
-Inicialmente pretende-se disponibilizar os seguintes serviços:
-    - Calendário (agenda) por secretarias;
-    - Cadastro dos cursos do Cevest, incluindo avisos diversos aos alunos, como início de curso, professor ausente, entre             outros;
-    - Cadastro de alunos fora da escola (Busca Ativa);
-    - Solicitação de serviços diversos, como lâmpadas de postes queimadas, buracos nas ruas, etc.
-    
-Posteriormente espera-se oferecer um sistema "multi-prefeituras".
+A few resources to get you started if this is your first Flutter project:
 
-### Linguagens e BD
+- [Lab: Write your first Flutter app](https://flutter.dev/docs/get-started/codelab)
+- [Cookbook: Useful Flutter samples](https://flutter.dev/docs/cookbook)
 
-O app está sendo feito em Flutter, o back-end em Django, e o banco de dados em MariaDB.
+For help getting started with Flutter, view our
+[online documentation](https://flutter.dev/docs), which offers tutorials,
+samples, guidance on mobile development, and a full API reference.

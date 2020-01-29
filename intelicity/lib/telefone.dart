@@ -15,7 +15,7 @@ class TelefonePage extends StatelessWidget {
             Padding(
               padding: const EdgeInsets.only(top: 20, bottom: 20),
               child: Text('Clique sobre o número para discar:',
-                  style: TextStyle(fontSize: 20.0),
+                style: TextStyle(fontSize: 20.0),
               ),
             ),
             Container(
@@ -57,29 +57,29 @@ class TelefonePage extends StatelessWidget {
   }
   _criarLinhaTable(String listaNome, String listaNum) {
     return TableRow(
-      children: [
-        Container(
-          alignment: Alignment.center,
-          child: Text(
-            listaNome,
-            style: TextStyle(fontSize: 20.0),
-          ),
-          padding: EdgeInsets.all(8.0),
-        ),
-
-        GestureDetector(
-          onTap: () => { _launchURL(listaNum) },
-          child: Container(
+        children: [
+          Container(
             alignment: Alignment.center,
             child: Text(
-              listaNum,
+              listaNome,
               style: TextStyle(fontSize: 20.0),
             ),
             padding: EdgeInsets.all(8.0),
           ),
-        ),
 
-      ]
+          GestureDetector(
+            onTap: () => { _launchURL(listaNum) },
+            child: Container(
+              alignment: Alignment.center,
+              child: Text(
+                listaNum,
+                style: TextStyle(fontSize: 20.0),
+              ),
+              padding: EdgeInsets.all(8.0),
+            ),
+          ),
+
+        ]
 /*
       listaNomes.split(',').map((name) {
         return Container(

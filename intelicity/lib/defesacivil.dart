@@ -7,7 +7,12 @@ class DefesaCivilPage extends StatelessWidget {
       appBar: AppBar(
         title: Text('Defesa Civil'),
       ),
-      body: Text('Estamos em estágio de ATENÇÃO desde: 23/11/2019 - 11:23'),
+      body: Column(
+        children: <Widget>[
+          Text('Estamos em estágio de ATENÇÃO desde: 23/11/2019 - 11:23'),
+          RaisedButton(child: Text('Pontos de Apoio'), onPressed: null)
+        ],
+      ),
     );
   }
 }

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class CevestPage extends StatelessWidget {
   @override
@@ -7,7 +8,17 @@ class CevestPage extends StatelessWidget {
       appBar: AppBar(
         title: Text('Cevest'),
       ),
-      body: Text('Matrícula Cevest'),
+      body: Column(
+        children: <Widget>[
+          Text('Matrícula Cevest'),
+          RaisedButton(
+            child: Text('Acessa site'),
+              onPressed: () {
+                launch('https://cevest.jlb.net.br');
+              }
+          )
+        ],
+      ),
     );
   }
 }
