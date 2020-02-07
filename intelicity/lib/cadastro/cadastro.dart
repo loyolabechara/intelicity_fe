@@ -4,9 +4,8 @@ import 'package:intelicity/cadastro/cadastro_controle.dart';
 import 'package:flutter_masked_text/flutter_masked_text.dart';
 import 'package:date_format/date_format.dart';
 import 'package:intelicity/classes/cidade_classe.dart';
+import 'package:intelicity/classes/bairro_classe.dart';
 import 'package:intelicity/classes/drop_mobx.dart';
-import 'package:intelicity/globals.dart' as globals;
-import 'package:dio/dio.dart';
 
 class CadastroPage extends StatelessWidget {
   String nome,
@@ -68,14 +67,16 @@ class CadastroPage extends StatelessWidget {
         formatDate(hoje_15, [dd, '/', mm, '/', yyyy]);
 
     Cidade cidade = Cidade();
+    Bairro bairro = Bairro();
     DropMobx dropMobx = DropMobx();
 
     var _cidades = cidade.carregaCidade();
 
+    var _bairros;
+
     return Column(
       children: <Widget>[
         SizedBox(height: 15.0),
-
         Observer(builder: (_) {
           return _textField(
             labelText: "Nome Completo",
@@ -83,9 +84,7 @@ class CadastroPage extends StatelessWidget {
             errorText: cadastrocontrole.validaNome,
           );
         }),
-
         SizedBox(height: 15.0),
-
         Observer(builder: (_) {
           return _textField(
             labelText: "CPF",
@@ -95,9 +94,7 @@ class CadastroPage extends StatelessWidget {
             keyboardtype: TextInputType.phone,
           );
         }),
-
         SizedBox(height: 15.0),
-
         Observer(builder: (_) {
           return _textField(
             labelText: "Celular",
@@ -107,9 +104,7 @@ class CadastroPage extends StatelessWidget {
             keyboardtype: TextInputType.phone,
           );
         }),
-
         SizedBox(height: 15.0),
-
         Observer(
           builder: (_) {
             return _textField(
@@ -120,9 +115,7 @@ class CadastroPage extends StatelessWidget {
             );
           },
         ),
-
         SizedBox(height: 15.0),
-
         Observer(
           builder: (_) {
             return Row(
@@ -154,29 +147,24 @@ class CadastroPage extends StatelessWidget {
             );
           },
         ),
-
         SizedBox(height: 15.0),
-
         Row(
           children: <Widget>[
             Text('Data Nascimento: '),
             Observer(
               builder: (_) {
                 return RaisedButton(
-                  onPressed: () =>
-                  {
+                  onPressed: () => {
                     _selectDate(context, hoje, hoje_15),
                   },
-                  child: Text(
-                      "${cadastrocontrole.cadastrovalida.dt_nascimento}"),
+                  child:
+                      Text("${cadastrocontrole.cadastrovalida.dt_nascimento}"),
                 );
               },
             ),
           ],
         ),
-
         SizedBox(height: 15.0),
-
         Observer(
           builder: (_) {
             return _textField(
@@ -186,9 +174,7 @@ class CadastroPage extends StatelessWidget {
             );
           },
         ),
-
         SizedBox(height: 15.0),
-
         Observer(
           builder: (_) {
             return _textField(
@@ -198,55 +184,107 @@ class CadastroPage extends StatelessWidget {
             );
           },
         ),
+        SizedBox(height: 15.0),
+        TextFormField(
+          //      onChanged: onChanged,
+          //       controller: controller,
+          decoration: InputDecoration(
+            border: OutlineInputBorder(),
+            labelText: "Complemento",
+            //         errorText: errorText == null ? null : errorText(),
+          ),
+        ),
 
         SizedBox(height: 15.0),
 
         Observer(
           builder: (_) {
-            return _textField(
-              labelText: "Complemento",
-              onChanged: cadastrocontrole.cadastrovalida.changeComplemento,
+//            print('Cidade:::' + dropMobx.id_cidade);
+            _bairros = bairro.carregaBairro(dropMobx.id_cidade);
+
+            return FutureBuilder(
+              future: _cidades,
+              builder: (context, snapshot) {
+                if (snapshot.hasData) {
+                  return DropdownButton(
+                    items:
+                        snapshot.data.map<DropdownMenuItem<String>>((cidade) {
+                      return DropdownMenuItem<String>(
+                        child: Text(cidade['nome']),
+                        value: cidade['id'].toString(),
+                      );
+                    }).toList(),
+                    onChanged: (value) {
+                      dropMobx.id_bairro = "0";
+                      dropMobx.escolheIdCidade(value);
+//                                    print(value);
+                    },
+                    value: dropMobx.id_cidade,
+                  );
+                } else {
+                  return Center(
+                    child: CircularProgressIndicator(),
+                  );
+                }
+              },
             );
           },
         ),
 
         SizedBox(height: 15.0),
+/*
+        Observer(
+          builder: (_) {
+            return DropdownButton(
+//                items: dropMobx.carrega_bairro(dropMobx.id_cidade),
+                onChanged: null);
+          },
+        ),
+*/
+        SizedBox(height: 15.0),
 
         Observer(
-            builder: (_) {
+          builder: (_) {
+            dropMobx.id_bairro = "0";
 
-                return FutureBuilder(
-                    future: _cidades,
+            print('Bairro:::' + dropMobx.id_bairro);
 
-                    builder: (context, snapshot) {
-                        if (snapshot.hasData) {
-                            return DropdownButton(
-                                items: snapshot.data.map<DropdownMenuItem<String>>((cidade) {
-                                    return DropdownMenuItem<String>(
-                                        child: Text(cidade['nome']),
-                                        value: cidade['id'].toString(),
-                                    );
-                                }).toList(),
+            print(_bairros);
 
-                                onChanged: (value){
-                                    dropMobx.escolheIdCidade(value);
-                                    print(value);
-                                },
-                                value: dropMobx.id_cidade,
-                            );
+//            if (_bairros.length > 0){
+//              dropMobx.id_bairro = '0';
+//            };
 
-
-                        } else {
-                            return Center(
-                                child: CircularProgressIndicator(),
-                            );
-                        }
+            return FutureBuilder(
+              future: _bairros,
+              builder: (context, snapshot) {
+                if (snapshot.hasData) {
+                  print(snapshot.data);
+                  return DropdownButton(
+                    items:
+                        snapshot.data.map<DropdownMenuItem<String>>((bairro) {
+                      return DropdownMenuItem<String>(
+                        child: Text(bairro['nome']),
+                        value: bairro['id'].toString(),
+                      );
+                    }).toList(),
+                    onChanged: (value) {
+                      dropMobx.escolheIdBairro(value);
+                      print('Bairro: ' + value);
                     },
-                );
-            },
+                    value: dropMobx.id_bairro,
+                  );
+                } else {
+                  return Center(
+                    child: CircularProgressIndicator(),
+                  );
+                }
+              },
+            );
+          },
         ),
-
         SizedBox(height: 15.0),
+
 /*
         FutureBuilder(
             future: cidade.carregaCidade(),
@@ -286,7 +324,6 @@ class CadastroPage extends StatelessWidget {
         SizedBox(height: 15.0),
 */
         SizedBox(height: 15.0),
-
         RaisedButton(
           onPressed: null,
 //          onPressed: cadastrovalida.sendForm(_key),
@@ -298,11 +335,12 @@ class CadastroPage extends StatelessWidget {
 
   ////////////////////////////////////////////
 
-  _textField({String labelText,
-    onChanged,
-    controller,
-    keyboardtype,
-    String Function() errorText}) {
+  _textField(
+      {String labelText,
+      onChanged,
+      controller,
+      keyboardtype,
+      String Function() errorText}) {
     return TextFormField(
       onChanged: onChanged,
       controller: controller,
@@ -318,7 +356,6 @@ class CadastroPage extends StatelessWidget {
   ///////////////////////
 
   Future<Null> _selectDate(BuildContext context, hoje, hoje_15) async {
-
     final DateTime picked = await showDatePicker(
       context: context,
       initialDate: hoje_15,
@@ -328,7 +365,5 @@ class CadastroPage extends StatelessWidget {
 
     cadastrocontrole.cadastrovalida.dt_nascimento =
         formatDate(picked, [dd, '/', mm, '/', yyyy]);
-
   }
-
 }

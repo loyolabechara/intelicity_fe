@@ -3,13 +3,13 @@ import 'package:intelicity/models/globals.dart' as globals;
 import 'package:http/http.dart' as http;
 
 
-class Cidade {
+class Bairro {
 
-  Future carregaCidade() async {
-    final String url = globals.url + 'cidades/';
- //   try{
+  Future carregaBairro(_id_cidade) async {
+    final String url = globals.url + 'bairros/'+_id_cidade;
+    //   try{
 
-      print('1------  ${url}');
+    print('1------  ${url}');
 
 //      Response response;
 
@@ -25,24 +25,37 @@ class Cidade {
 
 ////////////////////
 
-      final response = await http.get(
-          url,
-        headers: {"Authorization": "token " + globals.credenciais},
-      );
+    print('Credenciais: '+globals.credenciais);
 
-      if (response.statusCode == 200) {
+    final response = await http.get(
+      url,
+      headers: {"Authorization": "token " + globals.credenciais},
+    );
 
-        return json.decode(response.body);
+    if (response.statusCode == 200) {
 
-      } else {
-        throw Exception('Failed to load photos');
-      }
+      print(response.body);
 
-
+      String x = '{"id":0,"cidade_id":0,"nome":"Selecionar"}';
 
 
+      var teste = json.decode(response.body);
 
-      //////////////
+      print(teste.runtimeType);
+      teste.insert(0, json.decode(x));
+      print (teste);
+
+      return teste;
+
+    } else {
+      throw Exception('Failed to load bairros');
+    }
+
+
+
+
+
+    //////////////
 
 //      print('vai notificar===========' + response.data.toString());
 
@@ -55,15 +68,15 @@ class Cidade {
 //      print(response.data);
 //      var decodeJson = jsonDecode(response.data);
 
-      print('Tipo1:');
+    print('Tipo1:');
 //      print(response.data.runtimeType);
-      print('Tipo2:');
+    print('Tipo2:');
 //      print(jsonDecode(response.data).runtimeType);
 //      return jsonDecode(response.data);
 //      return jsonDecode(response.data);
 //    } catch(error) {
 //      print('Erro no acesso a cidades: ' + error.toString());
-    }
+  }
 //  }
 
 }

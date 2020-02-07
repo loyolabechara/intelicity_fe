@@ -1,4 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_mobx/flutter_mobx.dart';
+import 'package:intelicity/classes/drop_mobx.dart';
+import 'package:intelicity/controllers/defesa_civil_controller.dart';
+
+DropMobx dropMobx = DropMobx();
 
 
 Widget Corpo(BuildContext context) {
@@ -47,7 +52,23 @@ Widget Corpo(BuildContext context) {
   );
 }
 
+Future trocacor () async {
+
+  DefesaCivil defesaCivil = DefesaCivil();
+
+  var situacao = await defesaCivil.getSituacao();
+  dropMobx.mudacor(situacao['alerta']);
+
+}
+
 Widget BotaoDefesaCivil(BuildContext context){
+
+  trocacor();
+
+  Color _cor = Colors.white;
+  String _estagio = '';
+
+
   return GestureDetector(
     onTap: () => {
       Navigator.pushNamed(context, '/DefesaCivil')
@@ -56,19 +77,47 @@ Widget BotaoDefesaCivil(BuildContext context){
       alignment: Alignment.topRight,
       child: Padding(
         padding: const EdgeInsets.only(top: 6.0, right: 6.0),
-        child: Container(
-          color: Colors.yellowAccent,
-          child: Padding(
-            padding: const EdgeInsets.all(6.0),
-            child: Column(
-              children: <Widget>[
-                Image.asset('images/defesacivil.png', width: 100,),
-                Text('Atenção', style: const TextStyle(
-                    fontWeight: FontWeight.bold, fontSize: 22.0),
+        child: Observer(
+          builder: (_) {
+
+            switch (dropMobx.cor){
+              case 1:{
+                _cor = Colors.green;
+                _estagio = 'Vigilância';
+              }
+              break;
+              case 2:{
+                _cor = Colors.yellow;
+                _estagio = 'Atenção';
+              }
+              break;
+              case 3:{
+                _cor = Colors.orange;
+                _estagio = 'Alerta';
+              }
+              break;
+              case 4:{
+                _cor = Colors.red;
+                _estagio = 'Alerta Máximo';
+              }
+            }
+
+            return Container(
+              color: _cor,
+              child: Padding(
+                padding: const EdgeInsets.all(6.0),
+                child: Column(
+                  children: <Widget>[
+                    Image.asset('images/defesacivil.png', width: 100,),
+                    Text(_estagio, style: const TextStyle(
+                        fontWeight: FontWeight.bold, fontSize: 22.0),
+                    ),
+                  ],
                 ),
-              ],
-            ),
-          ),
+              ),
+            );
+
+          }
         ),
       ),
     ),
@@ -84,7 +133,12 @@ Widget LogoPMNF(BuildContext context) {
       bottom: 40,
     ),
     child: Center(
-      child: Image.asset('images/brasaorgb.png'),
+      child: GestureDetector(
+          onTap: (){
+            Navigator.pushNamed(context, '/Prefeitura');
+          },
+          child: Image.asset('images/brasaorgb.png'),
+      ),
     ),
   );
 }
@@ -129,9 +183,9 @@ Widget Botoes2(BuildContext context){
           width: 180,
           child: RaisedButton(
             onPressed: () => {
-              Navigator.pushNamed(context, '/Calendario')
+              Navigator.pushNamed(context, '/Agenda')
             },
-            child: Text('Calendário', style: const TextStyle(
+            child: Text('Agenda', style: const TextStyle(
                 fontWeight: FontWeight.bold, fontSize: 16.0, color: Colors.white),
             ),
           ),

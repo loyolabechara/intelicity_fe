@@ -1,14 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:intelicity/classes/acessa_storage.dart';
+import 'package:intelicity/controllers/acessa_storage.dart';
 
-import 'package:intelicity/inicio.dart';
+import 'package:intelicity/views/inicio.dart';
 import 'package:intelicity/cadastro/cadastro.dart';
 import 'package:intelicity/rotas.dart';
 import 'package:intelicity/tema/style.dart';
-
-import 'package:intelicity/classes/cidade_classe.dart';
-
-import 'globals.dart' as globals;
 
 void main() => runApp(MyApp());
 
@@ -38,10 +34,8 @@ class MyApp extends StatelessWidget {
               );
             } else {
               if (snapshot.data == 'n') {
-                print(snapshot.data);
                 return CadastroPage();
               } else {
-                print(snapshot.data);
                 return InicioPage();
               }
             }

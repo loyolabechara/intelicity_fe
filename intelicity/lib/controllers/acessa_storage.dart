@@ -1,5 +1,5 @@
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
-import '../globals.dart' as globals;
+import '../models/globals.dart' as globals;
 
 
 class AcessaStorage {
@@ -10,6 +10,12 @@ class AcessaStorage {
     // Verifica se dados do usuário estão salvos no Storage
 
     final storage = new FlutterSecureStorage();
+
+    // Grava para teste
+
+    await storage.write(key: 'id', value: '40');
+    await storage.write(key: 'token', value: '7370ff9b19cb4a54783e395980c4e169dd5927a3');
+
 
     // Retirar essa linha
     // await storage.deleteAll();

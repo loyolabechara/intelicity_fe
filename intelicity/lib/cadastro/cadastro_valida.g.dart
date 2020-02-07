@@ -145,23 +145,6 @@ mixin _$CadastroValida on _CadastroBase, Store {
     }, _$numeroAtom, name: '${_$numeroAtom.name}_set');
   }
 
-  final _$complementoAtom = Atom(name: '_CadastroBase.complemento');
-
-  @override
-  String get complemento {
-    _$complementoAtom.context.enforceReadPolicy(_$complementoAtom);
-    _$complementoAtom.reportObserved();
-    return super.complemento;
-  }
-
-  @override
-  set complemento(String value) {
-    _$complementoAtom.context.conditionallyRunInAction(() {
-      super.complemento = value;
-      _$complementoAtom.reportChanged();
-    }, _$complementoAtom, name: '${_$complementoAtom.name}_set');
-  }
-
   final _$_CadastroBaseActionController =
       ActionController(name: '_CadastroBase');
 
@@ -240,16 +223,6 @@ mixin _$CadastroValida on _CadastroBase, Store {
     final _$actionInfo = _$_CadastroBaseActionController.startAction();
     try {
       return super.changeNumero(value);
-    } finally {
-      _$_CadastroBaseActionController.endAction(_$actionInfo);
-    }
-  }
-
-  @override
-  dynamic changeComplemento(String value) {
-    final _$actionInfo = _$_CadastroBaseActionController.startAction();
-    try {
-      return super.changeComplemento(value);
     } finally {
       _$_CadastroBaseActionController.endAction(_$actionInfo);
     }

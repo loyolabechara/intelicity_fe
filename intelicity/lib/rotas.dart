@@ -1,14 +1,17 @@
 import 'package:flutter/material.dart';
-import 'package:intelicity/buscaativa.dart';
+import 'package:intelicity/views/agenda.dart';
+import 'package:intelicity/views/agendaassunto.dart';
+import 'package:intelicity/views/buscaativa.dart';
 import 'package:intelicity/cadastro/cadastro.dart';
-import 'package:intelicity/cevest.dart';
-import 'package:intelicity/defesacivil.dart';
-import 'package:intelicity/emprego.dart';
-import 'package:intelicity/inicio.dart';
-import 'package:intelicity/sobre.dart';
-import 'package:intelicity/solicitacao.dart';
-import 'package:intelicity/calendario.dart';
-import 'package:intelicity/telefone.dart';
+import 'package:intelicity/views/cevest.dart';
+import 'package:intelicity/views/defesacivil.dart';
+import 'package:intelicity/views/emprego.dart';
+import 'package:intelicity/views/inicio.dart';
+import 'package:intelicity/views/pontosdeapoio.dart';
+import 'package:intelicity/views/prefeitura.dart';
+import 'package:intelicity/views/sobre.dart';
+import 'package:intelicity/views/solicitacao.dart';
+import 'package:intelicity/views/telefone.dart';
 
 class RouteGenerator {
   static Route<dynamic> generateRoute(RouteSettings settings) {
@@ -19,14 +22,20 @@ class RouteGenerator {
       case '/DefesaCivil':
         return MaterialPageRoute<dynamic>(builder: (_) => DefesaCivilPage());
 
+      case '/Prefeitura':
+        return MaterialPageRoute<dynamic>(builder: (_) => PrefeituraPage());
+
       case '/BuscaAtiva':
         return MaterialPageRoute<dynamic>(builder: (_) => BuscaAtivaPage());
 
       case '/Cevest':
         return MaterialPageRoute<dynamic>(builder: (_) => CevestPage());
 
-      case '/Calendario':
-        return MaterialPageRoute<dynamic>(builder: (_) => CalendarioPage());
+      case '/Agenda':
+        return MaterialPageRoute<dynamic>(builder: (_) => AgendaPage());
+
+      case '/AgendaAssunto':
+        return MaterialPageRoute<dynamic>(builder: (_) => AgendaAssuntoPage());
 
       case '/Solicitacao':
         return MaterialPageRoute<dynamic>(builder: (_) => SolicitacaoPage());
@@ -39,6 +48,9 @@ class RouteGenerator {
 
       case '/Telefones':
         return MaterialPageRoute<dynamic>(builder: (_) => TelefonePage());
+
+      case '/PontosDeApoio':
+        return MaterialPageRoute<dynamic>(builder: (_) => PontosDeApoioPage());
 
       case '/Sobre':
         return MaterialPageRoute<dynamic>(builder: (_) => SobrePage());

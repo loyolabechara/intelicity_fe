@@ -53,11 +53,11 @@ abstract class _CadastroBase with Store{
 
   @action
   changeNumero(String value) => numero = value;
-
+/*
   @observable
   String complemento;
 
   @action
   changeComplemento(String value) => complemento = value;
-
+*/
 }
