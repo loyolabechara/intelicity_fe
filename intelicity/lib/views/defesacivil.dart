@@ -72,7 +72,7 @@ class DefesaCivilPage extends StatelessWidget {
                         RaisedButton(
                           child: Text('Histórico de Alertas'),
                           onPressed: () => {
-                            Navigator.pushNamed(context, '/PontosDeApoio')
+                            Navigator.pushNamed(context, '/HistoricoAlertas')
                           },
                         ),
                       ],

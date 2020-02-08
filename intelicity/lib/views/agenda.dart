@@ -49,7 +49,8 @@ class _AgendaPageState extends State<AgendaPage> {
                   padding: const EdgeInsets.all(8.0),
                   child: GestureDetector(
                     onTap: (){
-                      Navigator.pushNamed(context, '/AgendaAssunto');
+                      print (agenda.assuntos[index]['id']);
+                      Navigator.pushNamed(context, '/AgendaAssunto', arguments: agenda.assuntos[index]['id']);
                     },
                     child: Card(
                       color: Colors.white70,

@@ -6,6 +6,7 @@ import 'package:intelicity/cadastro/cadastro.dart';
 import 'package:intelicity/views/cevest.dart';
 import 'package:intelicity/views/defesacivil.dart';
 import 'package:intelicity/views/emprego.dart';
+import 'package:intelicity/views/historicoalertas.dart';
 import 'package:intelicity/views/inicio.dart';
 import 'package:intelicity/views/pontosdeapoio.dart';
 import 'package:intelicity/views/prefeitura.dart';
@@ -35,7 +36,15 @@ class RouteGenerator {
         return MaterialPageRoute<dynamic>(builder: (_) => AgendaPage());
 
       case '/AgendaAssunto':
-        return MaterialPageRoute<dynamic>(builder: (_) => AgendaAssuntoPage());
+        final int args = settings.arguments;
+        if (args is! String) {
+          return MaterialPageRoute<dynamic>(
+            builder: (_) => AgendaAssuntoPage(
+              indice: args,
+            ),
+          );
+        }
+        return _errorRoute();
 
       case '/Solicitacao':
         return MaterialPageRoute<dynamic>(builder: (_) => SolicitacaoPage());
@@ -51,6 +60,9 @@ class RouteGenerator {
 
       case '/PontosDeApoio':
         return MaterialPageRoute<dynamic>(builder: (_) => PontosDeApoioPage());
+
+      case '/HistoricoAlertas':
+        return MaterialPageRoute<dynamic>(builder: (_) => HistoricoAlertasPage());
 
       case '/Sobre':
         return MaterialPageRoute<dynamic>(builder: (_) => SobrePage());
