@@ -1,31 +1,31 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:intelicity/controllers/agenda_assunto_controllers.dart';
+import 'package:intelicity/controllers/emprego_escolaridade_controller.dart';
 
-class AgendaAssuntoPage extends StatefulWidget {
+class EmpregoEscolaridadePage extends StatefulWidget {
 
   final int indice;
 
-  const AgendaAssuntoPage({
+  const EmpregoEscolaridadePage({
     Key key,
     @required this.indice,
   }) : super(key: key);
 
   @override
-  _AgendaAssuntoPageState createState() => _AgendaAssuntoPageState();
+  _EmpregoEscolaridadePageState createState() => _EmpregoEscolaridadePageState();
 }
 
-class _AgendaAssuntoPageState extends State<AgendaAssuntoPage> {
+class _EmpregoEscolaridadePageState extends State<EmpregoEscolaridadePage> {
 
-  AgendaAssunto agendaAssunto = AgendaAssunto();
+  EmpregoEscolaridade empregoEscolaridade = EmpregoEscolaridade();
 
-  var assuntos = [];
+  var vagas = [];
 
   void initState() {
 
     super.initState();
 
-    agendaAssunto.getEventos(widget.indice).then((onValue){
+    empregoEscolaridade.getVagas(widget.indice).then((onValue){
       setState(() {});
     });
   }
@@ -37,12 +37,12 @@ class _AgendaAssuntoPageState extends State<AgendaAssuntoPage> {
 
     return Scaffold(
       appBar: AppBar(
-        title: Text('Agenda Assunto'),
+        title: Text('Vagas'),
       ),
       body: Column(
         crossAxisAlignment: CrossAxisAlignment.center,
         children: <Widget>[
-          Text('Relação de Assuntos', style: const TextStyle(
+          Text('Relação de Vagas', style: const TextStyle(
               fontWeight: FontWeight.bold, fontSize: 20.0),
           ),
 
@@ -53,12 +53,24 @@ class _AgendaAssuntoPageState extends State<AgendaAssuntoPage> {
           Expanded(
             child: ListView.builder(
               itemBuilder: (BuildContext context, int index) {
+
+                String _sexo;
+
+                if(empregoEscolaridade.vagas[index]['sexo'] == 'M'){
+                  _sexo = 'Masculino';
+                } else
+                  if(empregoEscolaridade.vagas[index]['sexo'] == 'F') {
+                    _sexo = 'Feminino';
+                  } else {
+                    _sexo = 'Ambos';
+                  }
+
                 return Padding(
                   padding: const EdgeInsets.all(8.0),
                   child: GestureDetector(
                     onTap: (){
-                      print (agendaAssunto.assuntos[index]['id']);
-                      Navigator.pushNamed(context, '/AgendaAssunto', arguments: agendaAssunto.assuntos[index]['id']);
+                      print (empregoEscolaridade.vagas[index]['id']);
+                      Navigator.pushNamed(context, '/AgendaAssunto', arguments: empregoEscolaridade.vagas[index]['id']);
                     },
                     child: Card(
                       color: Colors.white70,
@@ -67,12 +79,17 @@ class _AgendaAssuntoPageState extends State<AgendaAssuntoPage> {
                         child: Column(
                           children: <Widget>[
                             Text(
-                              agendaAssunto.assuntos[index]['descricao'],
+                              empregoEscolaridade.vagas[index]['cargo']['nome'],
                               style: TextStyle(fontSize: 13, fontWeight: FontWeight.bold),
 
                             ),
                             Text(
-                              agendaAssunto.assuntos[index]['dt_evento'],
+                              'Sexo: ' + _sexo,
+                              style: TextStyle(fontSize: 13, fontWeight: FontWeight.bold),
+
+                            ),
+                            Text(
+                              'Data Inclusão: ' + empregoEscolaridade.vagas[index]['dt_inclusao'],
                               style: TextStyle(fontSize: 13, fontWeight: FontWeight.bold),
 
                             ),
@@ -84,7 +101,7 @@ class _AgendaAssuntoPageState extends State<AgendaAssuntoPage> {
                 );
 
               },
-              itemCount: agendaAssunto.tamanho,
+              itemCount: empregoEscolaridade.tamanho,
             ),
           )
         ],

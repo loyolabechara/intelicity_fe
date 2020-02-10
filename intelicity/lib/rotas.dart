@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:intelicity/views/empregoescolaridade.dart';
 import 'package:intelicity/views/agenda.dart';
 import 'package:intelicity/views/agendaassunto.dart';
 import 'package:intelicity/views/buscaativa.dart';
@@ -51,6 +52,17 @@ class RouteGenerator {
 
       case '/Emprego':
         return MaterialPageRoute<dynamic>(builder: (_) => EmpregoPage());
+
+      case '/EmpregoEscolaridade':
+        final int args = settings.arguments;
+        if (args is! String) {
+          return MaterialPageRoute<dynamic>(
+            builder: (_) => EmpregoEscolaridadePage(
+              indice: args,
+            ),
+          );
+        }
+        return _errorRoute();
 
       case '/Cadastro':
         return MaterialPageRoute<dynamic>(builder: (_) => CadastroPage());

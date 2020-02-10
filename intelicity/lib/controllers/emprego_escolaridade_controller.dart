@@ -1,14 +1,14 @@
 import 'package:intelicity/models/globals.dart' as globals;
 import 'package:dio/dio.dart';
 
-class AgendaAssunto {
+class EmpregoEscolaridade {
 
   int tamanho = 0;
-  var assuntos = null;
+  var vagas = null;
 
-  Future getEventos(int assunto) async{
+  Future getVagas(int escolaridade) async{
 
-    final String url = globals.url + 'agenda/eventos/'+assunto.toString();
+    final String url = globals.url + 'bemprego/vagas/'+escolaridade.toString();
 
     Dio dio = Dio();
 
@@ -23,7 +23,7 @@ class AgendaAssunto {
     print(response.data);
 
     tamanho = response.data.length;
-    assuntos = response.data;
+    vagas = response.data;
 
   }
 
