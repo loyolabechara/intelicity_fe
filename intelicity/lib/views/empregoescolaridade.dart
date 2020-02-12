@@ -67,34 +67,28 @@ class _EmpregoEscolaridadePageState extends State<EmpregoEscolaridadePage> {
 
                 return Padding(
                   padding: const EdgeInsets.all(8.0),
-                  child: GestureDetector(
-                    onTap: (){
-                      print (empregoEscolaridade.vagas[index]['id']);
-                      Navigator.pushNamed(context, '/AgendaAssunto', arguments: empregoEscolaridade.vagas[index]['id']);
-                    },
-                    child: Card(
-                      color: Colors.white70,
-                      child: Padding(
-                        padding: const EdgeInsets.all(8.0),
-                        child: Column(
-                          children: <Widget>[
-                            Text(
-                              empregoEscolaridade.vagas[index]['cargo']['nome'],
-                              style: TextStyle(fontSize: 13, fontWeight: FontWeight.bold),
+                  child: Card(
+                    color: Colors.white70,
+                    child: Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: Column(
+                        children: <Widget>[
+                          Text(
+                            empregoEscolaridade.vagas[index]['cargo']['nome'],
+                            style: TextStyle(fontSize: 13, fontWeight: FontWeight.bold),
 
-                            ),
-                            Text(
-                              'Sexo: ' + _sexo,
-                              style: TextStyle(fontSize: 13, fontWeight: FontWeight.bold),
+                          ),
+                          Text(
+                            'Sexo: ' + _sexo,
+                            style: TextStyle(fontSize: 13, fontWeight: FontWeight.bold),
 
-                            ),
-                            Text(
-                              'Data Inclusão: ' + empregoEscolaridade.vagas[index]['dt_inclusao'],
-                              style: TextStyle(fontSize: 13, fontWeight: FontWeight.bold),
+                          ),
+                          Text(
+                            'Data Inclusão: ' + empregoEscolaridade.vagas[index]['dt_inclusao'],
+                            style: TextStyle(fontSize: 13, fontWeight: FontWeight.bold),
 
-                            ),
-                          ],
-                        ),
+                          ),
+                        ],
                       ),
                     ),
                   ),

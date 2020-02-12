@@ -195,7 +195,7 @@ Widget Botoes2(BuildContext context){
           width: 180,
           child: RaisedButton(
             onPressed: () => {
-              Navigator.pushNamed(context, '/Telefones')
+              Navigator.pushNamed(context, '/CategoriaTelefone')
             },
             child: Text('Telefones Úteis', style: const TextStyle(
                 fontWeight: FontWeight.bold, fontSize: 16.0, color: Colors.white),

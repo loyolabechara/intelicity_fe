@@ -55,29 +55,23 @@ class _AgendaAssuntoPageState extends State<AgendaAssuntoPage> {
               itemBuilder: (BuildContext context, int index) {
                 return Padding(
                   padding: const EdgeInsets.all(8.0),
-                  child: GestureDetector(
-                    onTap: (){
-                      print (agendaAssunto.assuntos[index]['id']);
-                      Navigator.pushNamed(context, '/AgendaAssunto', arguments: agendaAssunto.assuntos[index]['id']);
-                    },
-                    child: Card(
-                      color: Colors.white70,
-                      child: Padding(
-                        padding: const EdgeInsets.all(8.0),
-                        child: Column(
-                          children: <Widget>[
-                            Text(
-                              agendaAssunto.assuntos[index]['descricao'],
-                              style: TextStyle(fontSize: 13, fontWeight: FontWeight.bold),
+                  child: Card(
+                    color: Colors.white70,
+                    child: Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: Column(
+                        children: <Widget>[
+                          Text(
+                            agendaAssunto.assuntos[index]['descricao'],
+                            style: TextStyle(fontSize: 13, fontWeight: FontWeight.bold),
 
-                            ),
-                            Text(
-                              agendaAssunto.assuntos[index]['dt_evento'],
-                              style: TextStyle(fontSize: 13, fontWeight: FontWeight.bold),
+                          ),
+                          Text(
+                            agendaAssunto.assuntos[index]['dt_evento'],
+                            style: TextStyle(fontSize: 13, fontWeight: FontWeight.bold),
 
-                            ),
-                          ],
-                        ),
+                          ),
+                        ],
                       ),
                     ),
                   ),

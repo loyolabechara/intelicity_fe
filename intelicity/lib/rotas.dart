@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:intelicity/views/categoriatelefone.dart';
 import 'package:intelicity/views/empregoescolaridade.dart';
 import 'package:intelicity/views/agenda.dart';
 import 'package:intelicity/views/agendaassunto.dart';
@@ -9,6 +10,7 @@ import 'package:intelicity/views/defesacivil.dart';
 import 'package:intelicity/views/emprego.dart';
 import 'package:intelicity/views/historicoalertas.dart';
 import 'package:intelicity/views/inicio.dart';
+import 'package:intelicity/views/minhassolicitacoes.dart';
 import 'package:intelicity/views/pontosdeapoio.dart';
 import 'package:intelicity/views/prefeitura.dart';
 import 'package:intelicity/views/sobre.dart';
@@ -47,8 +49,25 @@ class RouteGenerator {
         }
         return _errorRoute();
 
+      case '/CategoriaTelefone':
+        return MaterialPageRoute<dynamic>(builder: (_) => CategoriaTelefonePage());
+
+      case '/Telefones':
+        final int args = settings.arguments;
+        if (args is! String) {
+          return MaterialPageRoute<dynamic>(
+            builder: (_) => TelefonePage(
+              indice: args,
+            ),
+          );
+        }
+        return _errorRoute();
+
       case '/Solicitacao':
         return MaterialPageRoute<dynamic>(builder: (_) => SolicitacaoPage());
+
+      case '/MinhasSolicitacoes':
+        return MaterialPageRoute<dynamic>(builder: (_) => MinhasSolicitacoesPage());
 
       case '/Emprego':
         return MaterialPageRoute<dynamic>(builder: (_) => EmpregoPage());
@@ -67,8 +86,8 @@ class RouteGenerator {
       case '/Cadastro':
         return MaterialPageRoute<dynamic>(builder: (_) => CadastroPage());
 
-      case '/Telefones':
-        return MaterialPageRoute<dynamic>(builder: (_) => TelefonePage());
+      case '/CategoriaTelefone':
+        return MaterialPageRoute<dynamic>(builder: (_) => CategoriaTelefonePage());
 
       case '/PontosDeApoio':
         return MaterialPageRoute<dynamic>(builder: (_) => PontosDeApoioPage());

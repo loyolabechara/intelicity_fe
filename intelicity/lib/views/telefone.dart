@@ -1,114 +1,92 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:intelicity/controllers/telefone_controllers.dart';
+
 import 'package:url_launcher/url_launcher.dart';
 
+class TelefonePage extends StatefulWidget {
+  final int indice;
 
-class TelefonePage extends StatelessWidget {
+  const TelefonePage({
+    Key key,
+    @required this.indice,
+  }) : super(key: key);
+
+  @override
+  _TelefonePageState createState() => _TelefonePageState();
+}
+
+class _TelefonePageState extends State<TelefonePage> {
+  Telefone telefone = Telefone();
+
+  var telefones = [];
+
+  void initState() {
+    super.initState();
+
+    print(widget.indice);
+
+    telefone.getTelefones(widget.indice).then((onValue) {
+      setState(() {});
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Telefones Úteis'),
+        title: Text('Telefones'),
       ),
-      body: Center(
-        child: Column(
-          children: <Widget>[
-            Padding(
-              padding: const EdgeInsets.only(top: 20, bottom: 20),
-              child: Text('Clique sobre o número para discar:',
-                style: TextStyle(fontSize: 20.0),
-              ),
-            ),
-            Container(
-              color: Colors.blue,
-              width: 350,
-              child: criaTabela(),
-            )
-          ],
-        ),
-      ),
-    );
-  }
-
-  //////////////////////
-
-  criaTabela() {
-    return Table(
-      defaultColumnWidth: FixedColumnWidth(150.0),
-      border: TableBorder(
-        horizontalInside: BorderSide(
-          color: Colors.black,
-          style: BorderStyle.solid,
-          width: 1.0,
-        ),
-        verticalInside: BorderSide(
-          color: Colors.black,
-          style: BorderStyle.solid,
-          width: 1.0,
-        ),
-      ),
-      children: [
-        _criarLinhaTable("Nome", "Número"),
-        _criarLinhaTable("Prefeitura","2525-9100"),
-        _criarLinhaTable("Polícia","190"),
-        _criarLinhaTable("Bombeiro","193"),
-        _criarLinhaTable("Defesa Civil","199"),
-      ],
-    );
-  }
-  _criarLinhaTable(String listaNome, String listaNum) {
-    return TableRow(
-        children: [
+      body: Column(
+        crossAxisAlignment: CrossAxisAlignment.center,
+        children: <Widget>[
+          Text(
+            'Relação de Telefones',
+            style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 20.0),
+          ),
           Container(
-            alignment: Alignment.center,
-            child: Text(
-              listaNome,
-              style: TextStyle(fontSize: 20.0),
+            height: 15,
+          ),
+          Expanded(
+            child: ListView.builder(
+              itemBuilder: (BuildContext context, int index) {
+                return Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: GestureDetector(
+                    onTap: () =>
+                        {_launchURL(telefone.telefones[index]['numero'])},
+                    child: Card(
+                      color: Colors.white70,
+                      child: Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: <Widget>[
+                            Text(
+                              telefone.telefones[index]['nome'] + ': ',
+                              style: TextStyle(
+                                  fontSize: 15, fontWeight: FontWeight.bold),
+                            ),
+                            Text(
+                              telefone.telefones[index]['numero'],
+                              style: TextStyle(fontSize: 20.0),
+                            ),
+                          ],
+                        ),
+                      ),
+                    ),
+                  ),
+                );
+              },
+              itemCount: telefone.tamanho,
             ),
-            padding: EdgeInsets.all(8.0),
-          ),
-
-          GestureDetector(
-            onTap: () => { _launchURL(listaNum) },
-            child: Container(
-              alignment: Alignment.center,
-              child: Text(
-                listaNum,
-                style: TextStyle(fontSize: 20.0),
-              ),
-              padding: EdgeInsets.all(8.0),
-            ),
-          ),
-
-        ]
-/*
-      listaNomes.split(',').map((name) {
-        return Container(
-          alignment: Alignment.center,
-          child: Text(
-            name,
-            style: TextStyle(fontSize: 20.0),
-          ),
-          padding: EdgeInsets.all(8.0),
-        );
-      }).toList(),
-
- */
+          )
+        ],
+      ),
     );
   }
 
   _launchURL(listaNum) async {
-
-    launch("tel://"+listaNum);
-    print ('entrou');
-    /*
-    const url = 'https://flutter.dev';
-    if (await canLaunch(url)) {
-      await launch(url);
-    } else {
-      throw 'Could not launch $url';
-    }
-
-     */
+    launch("tel://" + listaNum);
   }
-
 }
