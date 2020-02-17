@@ -11,4 +11,4 @@ String url = 'https://be.intelicity.com.br/';
 
 String id;
 String token;
-String credenciais = '7370ff9b19cb4a54783e395980c4e169dd5927a3';
+String credenciais = 'b8ad9d1105777a674052c41f63faa4e6a43503b0';
