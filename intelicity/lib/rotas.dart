@@ -15,6 +15,7 @@ import 'package:intelicity/views/pontosdeapoio.dart';
 import 'package:intelicity/views/prefeitura.dart';
 import 'package:intelicity/views/sobre.dart';
 import 'package:intelicity/views/solicitacao.dart';
+import 'package:intelicity/views/solicitacaonova.dart';
 import 'package:intelicity/views/telefone.dart';
 
 class RouteGenerator {
@@ -68,6 +69,9 @@ class RouteGenerator {
 
       case '/MinhasSolicitacoes':
         return MaterialPageRoute<dynamic>(builder: (_) => MinhasSolicitacoesPage());
+
+      case '/SolicitacaoNova':
+        return MaterialPageRoute<dynamic>(builder: (_) => SolicitacaoNovaPage());
 
       case '/Emprego':
         return MaterialPageRoute<dynamic>(builder: (_) => EmpregoPage());

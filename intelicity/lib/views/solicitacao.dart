@@ -41,7 +41,7 @@ class SolicitacaoPage extends StatelessWidget {
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: () {
-          // Add your onPressed code here!
+          Navigator.pushNamed(context, '/SolicitacaoNova');
         },
         child: Icon(Icons.add),
         backgroundColor: Colors.blue,
